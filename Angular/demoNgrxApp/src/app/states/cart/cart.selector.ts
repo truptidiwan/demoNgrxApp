@@ -9,3 +9,9 @@ export const cartSelector = createSelector(
   selectCartState,
   (state: cartState) => state.products
 );
+// create a selector for total price
+
+export const totalPriceSelector = createSelector(
+  selectCartState,
+  (state: cartState) => state.totalPrice
+);

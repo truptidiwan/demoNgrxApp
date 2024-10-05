@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppState } from '../states/app.state';
 import { Store } from '@ngrx/store';
 import { IProduct } from '../shared/models/product.interface';
-import { cartSelector } from '../states/cart/cart.selector';
+import { cartSelector, totalPriceSelector } from '../states/cart/cart.selector';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ProductCardComponent } from '../shared/components/product-card/product-card.component';
@@ -11,6 +11,7 @@ import {
   incrementProduct,
   removeFromCart,
 } from '../states/cart/cart.action';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -21,9 +22,11 @@ import {
 })
 export class CartComponent {
   cartItems$!: Observable<IProduct[]>;
+  totalPrice$!: Observable<number>;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private router: Router) {
     this.cartItems$ = this.store.select(cartSelector);
+    this.totalPrice$ = this.store.select(totalPriceSelector);
   }
 
   removeFromCart = (productId: number) => {
@@ -40,5 +43,9 @@ export class CartComponent {
 
   increment = (productId: number) => {
     this.store.dispatch(incrementProduct({ productId }));
+  };
+
+  backToHome = () => {
+    this.router.navigate(['/home']); // Specify the route you want to navigate to
   };
 }
