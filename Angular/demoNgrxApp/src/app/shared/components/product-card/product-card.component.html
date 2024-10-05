@@ -1,0 +1,17 @@
+<div class="flex flex-col w-60 justify-between m-4 p-4 h-[600px] bg-gray-100 hover:bg-gray-200 rounded-lg">
+  <img class="rounded-lg" width="100" alt="Meghna foods image" src="{{product.image}}" />
+  <h4 class="font-bold py-4 text-lg flex-wrap">{{product.title}}</h4>
+  <div class="h-28">
+    <h4 class="pt-4 max-w-sm line-clamp-2 flex-wrap" title="{{product.description}}">
+      {{product.description}}</h4>
+  </div>
+  <h4 class="bg-gray-50 rounded-lg p-2 mt-1">💲 {{product.price}}</h4>
+  <div class="flex flex-col">
+    <button (click)="addToCart(product)"
+      class="bg-yellow-200 rounded-lg my-4 py-2 hover:bg-black/80 hover:text-white">Add
+      To
+      Cart</button>
+    <button (click)="viewProduct()" class="bg-orange-200 rounded-lg mb-4 py-2  hover:bg-black/80 hover:text-white">View
+      Product</button>
+  </div>
+</div>
