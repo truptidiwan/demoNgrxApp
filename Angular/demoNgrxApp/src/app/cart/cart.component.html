@@ -1,1 +1,27 @@
-<div>Cart: {{ cartItems$ | async |json }}</div>
+@if ((cartItems$ | async)?.length === 0) {
+<div class="flex flex-col h-14 justify-between m-4 p-4 bg-gray-100 hover:bg-gray-200 rounded-lg text-xl">
+  Your Cart is empty</div>
+}
+@else {
+<div class="flex flex-col flex-wrap mx-auto w-[580px]">
+  @for (item of (cartItems$ | async); track $index) {
+  <div class="flex flex-row h-48 m-4 p-4 bg-gray-100 hover:bg-gray-200 rounded-lg">
+    <img class="rounded-lg" width="100" alt="Meghna foods image" src="{{item.image}}" />
+    <div class="flex flex-row ml-2">
+      <div class="flex flex-col">
+        <h4 class="font-bold py-4 text-sm flex-wrap">{{item.title}}</h4>
+        <div class="flex flex-row">
+          <button class="bg-yellow-200 rounded-lg my-4 py-2 px-5 hover:bg-black/80 hover:text-white">Remove</button>
+          <button class="bg-yellow-200 rounded-lg my-4 py-2 px-5 mx-4 hover:bg-black/80 hover:text-white">Add To
+            Favourites</button>
+        </div>
+      </div>
+      <div class="flex flex-row bg-gray-50 rounded-lg p-2 mt-1 h-12">
+        <span>💲</span>
+        <h4>{{item.price}}</h4>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+}
