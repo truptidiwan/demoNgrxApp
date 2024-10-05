@@ -15,7 +15,7 @@ export class ProductService {
     return this.http.get<IProduct[]>('https://fakestoreapi.com/products').pipe(
       map((products) => {
         return products.map((product) => {
-          return { ...product, quantity: 0 };
+          return { ...product, quantity: 1 };
         });
       })
     );

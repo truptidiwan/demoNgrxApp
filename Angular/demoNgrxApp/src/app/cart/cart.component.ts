@@ -6,6 +6,11 @@ import { cartSelector } from '../states/cart/cart.selector';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ProductCardComponent } from '../shared/components/product-card/product-card.component';
+import {
+  decrementProduct,
+  incrementProduct,
+  removeFromCart,
+} from '../states/cart/cart.action';
 
 @Component({
   selector: 'app-cart',
@@ -19,6 +24,21 @@ export class CartComponent {
 
   constructor(private store: Store<AppState>) {
     this.cartItems$ = this.store.select(cartSelector);
-    console.log('this.cartItems$:', this.cartItems$);
   }
+
+  removeFromCart = (productId: number) => {
+    this.store.dispatch(removeFromCart({ productId }));
+  };
+
+  decrement = (productId: number, quantity: number) => {
+    if (quantity <= 1) {
+      this.store.dispatch(removeFromCart({ productId }));
+    } else {
+      this.store.dispatch(decrementProduct({ productId, quantity }));
+    }
+  };
+
+  increment = (productId: number) => {
+    this.store.dispatch(incrementProduct({ productId }));
+  };
 }

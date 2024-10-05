@@ -19,6 +19,7 @@ export const cartReducer = createReducer(
   initialCartState,
   on(addToCart, (state, { product }) => {
     const updatedProduct = [...state.products, product];
+    console.log('updatedProduct:', updatedProduct);
     return {
       ...state,
       products: updatedProduct,
@@ -35,7 +36,7 @@ export const cartReducer = createReducer(
       products: updatedProducts,
     };
   }),
-  on(decrementProduct, (state, { productId }) => {
+  on(decrementProduct, (state, { productId, quantity }) => {
     const updatedProducts = state.products.map((product) =>
       product.id === productId
         ? { ...product, quantity: product.quantity - 1 }

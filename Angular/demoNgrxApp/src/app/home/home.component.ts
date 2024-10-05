@@ -25,7 +25,6 @@ export class HomeComponent {
   constructor(private store: Store<{ cart: { products: IProduct[] } }>) {}
 
   handleAddToCart = (product: IProduct) => {
-    console.log('product:', product);
     this.store.dispatch(addToCart({ product }));
   };
 }

@@ -3,7 +3,7 @@
   Your Cart is empty</div>
 }
 @else {
-<div class="flex flex-col flex-wrap mx-auto w-[580px]">
+<div class="flex flex-col flex-wrap mx-auto w-[665px]">
   @for (item of (cartItems$ | async); track $index) {
   <div class="flex flex-row h-48 m-4 p-4 bg-gray-100 hover:bg-gray-200 rounded-lg">
     <img class="rounded-lg" width="100" alt="Meghna foods image" src="{{item.image}}" />
@@ -11,9 +11,22 @@
       <div class="flex flex-col">
         <h4 class="font-bold py-4 text-sm flex-wrap">{{item.title}}</h4>
         <div class="flex flex-row">
-          <button class="bg-yellow-200 rounded-lg my-4 py-2 px-5 hover:bg-black/80 hover:text-white">Remove</button>
-          <button class="bg-yellow-200 rounded-lg my-4 py-2 px-5 mx-4 hover:bg-black/80 hover:text-white">Add To
+          <button class="bg-yellow-200 rounded-lg my-4 py-2 px-5 hover:bg-black/80 hover:text-white"
+            (click)="removeFromCart(item.id)">Remove</button>
+          <button class="bg-orange-200 rounded-lg my-4 py-2 px-5 mx-4 hover:bg-black/80 hover:text-white">Add To
             Favourites</button>
+          <div class="quantity-controls flex items-center pl-4">
+            <button (click)="decrement(item.id, item.quantity)"
+              class="decrement-button bg-red-300 text-gray-600 hover:bg-red-400 px-2 py-1 rounded-l">
+              -
+            </button>
+            <input type="text" readonly class="quantity-input h-7 w-12 text-center border-t border-b"
+              value="{{item.quantity}}">
+            <button (click)="increment(item.id)"
+              class="increment-button bg-green-300 text-gray-600 hover:bg-green-400 px-2 py-1 rounded-r">
+              +
+            </button>
+          </div>
         </div>
       </div>
       <div class="flex flex-row bg-gray-50 rounded-lg p-2 mt-1 h-12">
@@ -23,5 +36,15 @@
     </div>
   </div>
   }
+  <div class="flex flex-col items-end">
+    <div class="font-bold">
+      Total Amount: 3
+    </div>
+    <div class="mt-5">
+      <button class="bg-yellow-200 rounded-lg mr-7 px-4 my-4 py-2 hover:bg-black/80 hover:text-white">Back To
+        Home</button>
+      <button class="bg-orange-200 rounded-lg px-4 my-4 py-2 hover:bg-black/80 hover:text-white">Checkout</button>
+    </div>
+  </div>
 </div>
 }

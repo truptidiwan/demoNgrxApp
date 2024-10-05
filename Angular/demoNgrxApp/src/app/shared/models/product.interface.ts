@@ -7,6 +7,7 @@ export interface IProduct {
   quantity: number;
   category: string;
   rating: number;
+  totalItem: number;
 }
 export interface IRating {
   rate: number;
