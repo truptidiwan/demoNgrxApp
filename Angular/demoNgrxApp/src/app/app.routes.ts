@@ -5,8 +5,8 @@ import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 
 export const routes: Routes = [
-  // { path: 'home', component: HomeComponent },
-  { path: 'home', component: CounterComponent },
+  { path: 'home', component: HomeComponent },
+  // { path: 'home', component: CounterComponent },
   {
     path: 'about',
     loadChildren: () =>

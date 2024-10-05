@@ -1,1 +1,16 @@
-<p>home works!</p>
+<ul class="flex flex-row flex-wrap">
+  <ng-container *ngFor="let item of (product$ | async)">
+    <div class="flex flex-col justify-between m-4 p-4 w-60 h-[600px] bg-gray-100 hover:bg-gray-200 rounded-lg">
+      <img class="rounded-lg w-32" alt="Meghna foods image" src="{{item.image}}" />
+      <h4 class="font-bold py-4 text-lg">{{item.title}}</h4>
+      <div class="flex">
+        <h4 class="py-4 flex-1 text-ellipsis overflow-hidden whitespace-nowrap">{{item.description}}</h4>
+      </div>
+      <h4 class="bg-gray-50 rounded-lg p-2">💲 {{item.price}}</h4>
+      <div class="flex flex-col">
+        <button class="bg-yellow-200 rounded-lg my-4 py-2">Add To Cart</button>
+        <button class="bg-orange-200 rounded-lg mb-4 py-2">View Product</button>
+      </div>
+    </div>
+  </ng-container>
+</ul>

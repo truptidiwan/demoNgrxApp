@@ -1,24 +1,9 @@
-<div class="w-full flex h-svh max-h-svh">
-  <div class="h-full flex-1">
-    <!-- Main Content -->
-    <div class="flex h-full flex-col justify-between overflow-y-scroll">
-      <!-- Header -->
-      <div>
-        <app-header />
-      </div>
+<div class="flex flex-col h-screen">
+  <app-header />
 
-      <div>
-        <!-- Content -->
-        <router-outlet></router-outlet>
-      </div>
-
-      <div class="w-full">
-        <!-- Footer -->
-        <div class="bg-pink-200 py-2">
-          <h1 class="text-center text-xl">Footer</h1>
-        </div>
-      </div>
-    </div>
+  <div class="flex-grow overflow-y-auto">
+    <router-outlet></router-outlet>
   </div>
 
+  <app-footer />
 </div>
