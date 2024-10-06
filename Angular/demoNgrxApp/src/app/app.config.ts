@@ -11,6 +11,7 @@ import { ProductReducer } from './states/product/product.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { ProductEffect } from './states/product/product.effect';
 
+// Import the provideState and provideEffects in config file
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),

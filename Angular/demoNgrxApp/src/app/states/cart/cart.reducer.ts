@@ -7,30 +7,40 @@ import {
   removeFromCart,
 } from './cart.action';
 
+// Reducer will have initial state of cart and
+// it will implement the business logic for the actions before updating the state
+
+// Create interface for cart state
 export interface cartState {
   products: IProduct[];
   totalPrice: number;
   totalQuantity: number;
 }
 
+// Initialize the cart interface
 export const initialCartState: cartState = {
   products: [],
   totalPrice: 0,
   totalQuantity: 0,
 };
 
+// calculateTotalPrice function has logic to calculate the total price
 export function calculateTotalPrice(products: IProduct[]) {
   return products.reduce((totalPrice, product) => {
     return totalPrice + product.price * product.quantity;
   }, 0);
 }
 
+// calculateTotalQuantity function has logic to calculate the total quantity
 export function calculateTotalQuantity(products: IProduct[]) {
   return products.reduce((quantity, product) => {
     return quantity + product.quantity;
   }, 0);
 }
 
+// reducer function implements the business logic for all the actions
+//1. 1st argument is initial state Provides a state value if the current state is undefined, as it is initially
+//2. Association between actions and state change
 export const cartReducer = createReducer(
   initialCartState,
   on(addToCart, (state, { product }) => {

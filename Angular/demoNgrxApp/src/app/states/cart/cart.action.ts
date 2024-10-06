@@ -1,6 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 import { IProduct } from '../../shared/models/product.interface';
 
+// create action takes two arguments
+//1. the type of action
+//2. the props (optional) - props is a function which you need to call
 export const addToCart = createAction(
   '[Cart Component] addToCart',
   props<{ product: IProduct }>()

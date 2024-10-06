@@ -35,12 +35,11 @@ export class CartComponent {
     this.totalPrice$ = this.store.select(totalPriceSelector);
     this.totalQuantity$ = this.store.select(totalQuantitySelector);
     this.totalQuantity$.subscribe((value: number) => {
-      this.quan = value; // Assign the emitted number to the variable
+      this.quan = value;
     });
   }
 
   removeFromCart = (productId: number, quantity: number) => {
-    console.log('from remove cart quantity:', quantity);
     this.store.dispatch(
       removeFromCart({ productId, quantity, totalQuantity: this.quan })
     );
@@ -63,6 +62,6 @@ export class CartComponent {
   };
 
   backToHome = () => {
-    this.router.navigate(['/home']); // Specify the route you want to navigate to
+    this.router.navigate(['/home']);
   };
 }
