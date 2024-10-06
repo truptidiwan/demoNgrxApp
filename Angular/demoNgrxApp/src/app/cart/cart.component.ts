@@ -40,6 +40,7 @@ export class CartComponent {
   }
 
   removeFromCart = (productId: number, quantity: number) => {
+    console.log('from remove cart quantity:', quantity);
     this.store.dispatch(
       removeFromCart({ productId, quantity, totalQuantity: this.quan })
     );

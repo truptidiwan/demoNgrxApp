@@ -31,28 +31,21 @@ export function calculateTotalQuantity(products: IProduct[]) {
   }, 0);
 }
 
-export function calculatetotalQuantityReduced(
-  products: IProduct[],
-  totalQuantity: number
-) {
-  return products.reduce((quantity, product) => {
-    return totalQuantity - 1;
-  }, 0);
-}
-
-export function calculatetotalQuantityWhenRemovedFromCart(
-  products: IProduct[],
-  totalQuantity: number
-) {
-  return products.reduce((quantity, product) => {
-    return totalQuantity - product.quantity;
-  }, 0);
-}
-
 export const cartReducer = createReducer(
   initialCartState,
   on(addToCart, (state, { product }) => {
-    const updatedProducts = [...state.products, product];
+    const productExists = state.products.some(
+      (currProduct) => product.id === currProduct.id
+    );
+
+    const updatedProducts = productExists
+      ? state.products.map((currProduct) =>
+          product.id === currProduct.id
+            ? { ...currProduct, quantity: currProduct.quantity + 1 }
+            : currProduct
+        )
+      : [...state.products, product];
+
     return {
       ...state,
       products: updatedProducts,
@@ -83,10 +76,7 @@ export const cartReducer = createReducer(
       ...state,
       products: updatedProducts,
       totalPrice: calculateTotalPrice(updatedProducts),
-      totalQuantity: calculatetotalQuantityReduced(
-        updatedProducts,
-        totalQuantity
-      ),
+      totalQuantity: totalQuantity - 1,
     };
   }),
   on(removeFromCart, (state, { productId, quantity, totalQuantity }) => {
@@ -97,10 +87,7 @@ export const cartReducer = createReducer(
       ...state,
       products: updatedProducts,
       totalPrice: calculateTotalPrice(updatedProducts),
-      totalQuantity: calculatetotalQuantityWhenRemovedFromCart(
-        updatedProducts,
-        totalQuantity
-      ),
+      totalQuantity: totalQuantity - quantity,
     };
   })
 );
