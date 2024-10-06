@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 import { AppState } from '../states/app.state';
 import { Store } from '@ngrx/store';
 import { IProduct } from '../shared/models/product.interface';
-import { cartSelector, totalPriceSelector } from '../states/cart/cart.selector';
+import {
+  cartSelector,
+  totalPriceSelector,
+  totalQuantitySelector,
+} from '../states/cart/cart.selector';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ProductCardComponent } from '../shared/components/product-card/product-card.component';
@@ -23,21 +27,34 @@ import { Router } from '@angular/router';
 export class CartComponent {
   cartItems$!: Observable<IProduct[]>;
   totalPrice$!: Observable<number>;
+  totalQuantity$!: Observable<number>;
+  quan: number = 0;
 
   constructor(private store: Store<AppState>, private router: Router) {
     this.cartItems$ = this.store.select(cartSelector);
     this.totalPrice$ = this.store.select(totalPriceSelector);
+    this.totalQuantity$ = this.store.select(totalQuantitySelector);
+    this.totalQuantity$.subscribe((value: number) => {
+      this.quan = value; // Assign the emitted number to the variable
+      console.log('The number is:', this.quan); // Output the number
+    });
   }
 
-  removeFromCart = (productId: number) => {
-    this.store.dispatch(removeFromCart({ productId }));
+  removeFromCart = (productId: number, quantity: number) => {
+    this.store.dispatch(
+      removeFromCart({ productId, quantity, totalQuantity: this.quan })
+    );
   };
 
   decrement = (productId: number, quantity: number) => {
     if (quantity <= 1) {
-      this.store.dispatch(removeFromCart({ productId }));
+      this.store.dispatch(
+        removeFromCart({ productId, quantity, totalQuantity: this.quan })
+      );
     } else {
-      this.store.dispatch(decrementProduct({ productId, quantity }));
+      this.store.dispatch(
+        decrementProduct({ productId, quantity, totalQuantity: this.quan })
+      );
     }
   };
 

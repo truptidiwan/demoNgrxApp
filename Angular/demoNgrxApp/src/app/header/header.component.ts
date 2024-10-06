@@ -9,7 +9,10 @@ import {
   selectCounterState,
 } from '../states/counter/counter.selector';
 import { IProduct } from '../shared/models/product.interface';
-import { cartSelector } from '../states/cart/cart.selector';
+import {
+  cartSelector,
+  totalQuantitySelector,
+} from '../states/cart/cart.selector';
 
 @Component({
   selector: 'app-header',
@@ -21,9 +24,11 @@ import { cartSelector } from '../states/cart/cart.selector';
 export class HeaderComponent {
   count$!: Observable<number>;
   products$!: Observable<IProduct[]>;
+  totalQuantity$!: Observable<number>;
 
   constructor(private store: Store<AppState>) {
     this.count$ = this.store.select(counterSelector);
     this.products$ = this.store.select(cartSelector);
+    this.totalQuantity$ = this.store.select(totalQuantitySelector);
   }
 }

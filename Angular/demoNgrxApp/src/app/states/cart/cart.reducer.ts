@@ -10,16 +10,44 @@ import {
 export interface cartState {
   products: IProduct[];
   totalPrice: number;
+  totalQuantity: number;
 }
 
 export const initialCartState: cartState = {
   products: [],
   totalPrice: 0,
+  totalQuantity: 0,
 };
 
 export function calculateTotalPrice(products: IProduct[]) {
   return products.reduce((totalPrice, product) => {
     return totalPrice + product.price * product.quantity;
+  }, 0);
+}
+
+export function calculateTotalQuantity(products: IProduct[]) {
+  return products.reduce((quantity, product) => {
+    console.log('calculateTotalQuantity quantity:', quantity);
+    console.log('calculateTotalQuantity product.quantity:', product.quantity);
+    return quantity + product.quantity;
+  }, 0);
+}
+
+export function calculatetotalQuantityReduced(
+  products: IProduct[],
+  totalQuantity: number
+) {
+  return products.reduce((quantity, product) => {
+    return totalQuantity - 1;
+  }, 0);
+}
+
+export function calculatetotalQuantityWhenRemovedFromCart(
+  products: IProduct[],
+  totalQuantity: number
+) {
+  return products.reduce((quantity, product) => {
+    return totalQuantity - product.quantity;
   }, 0);
 }
 
@@ -31,6 +59,7 @@ export const cartReducer = createReducer(
       ...state,
       products: updatedProducts,
       totalPrice: calculateTotalPrice(updatedProducts),
+      totalQuantity: calculateTotalQuantity(updatedProducts),
     };
   }),
   on(incrementProduct, (state, { productId }) => {
@@ -43,9 +72,10 @@ export const cartReducer = createReducer(
       ...state,
       products: updatedProducts,
       totalPrice: calculateTotalPrice(updatedProducts),
+      totalQuantity: calculateTotalQuantity(updatedProducts),
     };
   }),
-  on(decrementProduct, (state, { productId, quantity }) => {
+  on(decrementProduct, (state, { productId, quantity, totalQuantity }) => {
     const updatedProducts = state.products.map((product) =>
       product.id === productId
         ? { ...product, quantity: product.quantity - 1 }
@@ -55,9 +85,13 @@ export const cartReducer = createReducer(
       ...state,
       products: updatedProducts,
       totalPrice: calculateTotalPrice(updatedProducts),
+      totalQuantity: calculatetotalQuantityReduced(
+        updatedProducts,
+        totalQuantity
+      ),
     };
   }),
-  on(removeFromCart, (state, { productId }) => {
+  on(removeFromCart, (state, { productId, quantity, totalQuantity }) => {
     const updatedProducts = state.products.filter(
       (product) => product.id != productId
     );
@@ -65,6 +99,10 @@ export const cartReducer = createReducer(
       ...state,
       products: updatedProducts,
       totalPrice: calculateTotalPrice(updatedProducts),
+      totalQuantity: calculatetotalQuantityWhenRemovedFromCart(
+        updatedProducts,
+        totalQuantity
+      ),
     };
   })
 );

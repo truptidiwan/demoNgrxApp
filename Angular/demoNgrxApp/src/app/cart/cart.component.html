@@ -12,7 +12,7 @@
         <h4 class="font-bold py-4 text-sm flex-wrap">{{item.title}}</h4>
         <div class="flex flex-row">
           <button class="bg-yellow-200 rounded-lg my-4 py-2 px-5 hover:bg-black/80 hover:text-white"
-            (click)="removeFromCart(item.id)">Remove</button>
+            (click)="removeFromCart(item.id, item.quantity)">Remove</button>
           <button class="bg-orange-200 rounded-lg my-4 py-2 px-5 mx-4 hover:bg-black/80 hover:text-white">Add To
             Favourites</button>
           <div class="quantity-controls flex items-center pl-4">

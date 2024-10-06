@@ -16,8 +16,8 @@
         </li>
         <li class="px-4 m-6">
           <a routerLink="/cart" routerLinkActive="active" ariaCurrentWhenActive="page">Cart <span
-              class="text-blue-500">{{ (products$
-              |async)?.length}}</span></a>
+              class="text-blue-500">{{ totalQuantity$
+              |async}}</span></a>
         </li>
         <li class="px-4 m-6">
           <a routerLink="/counter" routerLinkActive="active" ariaCurrentWhenActive="page">Counter</a>
