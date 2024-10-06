@@ -36,7 +36,6 @@ export class CartComponent {
     this.totalQuantity$ = this.store.select(totalQuantitySelector);
     this.totalQuantity$.subscribe((value: number) => {
       this.quan = value; // Assign the emitted number to the variable
-      console.log('The number is:', this.quan); // Output the number
     });
   }
 

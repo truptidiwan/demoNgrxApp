@@ -27,8 +27,6 @@ export function calculateTotalPrice(products: IProduct[]) {
 
 export function calculateTotalQuantity(products: IProduct[]) {
   return products.reduce((quantity, product) => {
-    console.log('calculateTotalQuantity quantity:', quantity);
-    console.log('calculateTotalQuantity product.quantity:', product.quantity);
     return quantity + product.quantity;
   }, 0);
 }
