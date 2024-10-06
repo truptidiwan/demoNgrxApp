@@ -1,6 +1,7 @@
 <div class="flex flex-row flex-wrap">
   @if(error | async){
-  <h1 class="text-4xl dark:text-white">Something went wrong while loading products</h1>
+  <div class="flex flex-col h-14 justify-between m-4 p-4 bg-gray-100 hover:bg-gray-200 rounded-lg text-xl">
+    Something went wrong while loading products</div>
   }@else {
   @for (item of (product$ | async); track $index) {
   <app-product-card [product]="item" (handleAdd)="handleAddToCart($event)" />;

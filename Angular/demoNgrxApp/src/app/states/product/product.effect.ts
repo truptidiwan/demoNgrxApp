@@ -19,7 +19,6 @@ export class ProductEffect {
       switchMap(() =>
         this.api.getProducts().pipe(
           map((res) => {
-            console.log('res:', res);
             return loadProductSuccess({ products: res });
           }),
           catchError((error: { message: string }) =>

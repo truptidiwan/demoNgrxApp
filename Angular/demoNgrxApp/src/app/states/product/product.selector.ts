@@ -15,13 +15,3 @@ export const selectProductError = createSelector(
   selectProductFeature,
   (state: ProductState) => state.error
 );
-
-// export const selectAllProducts = createSelector(
-//   selectProductState,
-//   (state: ProductState) => state.products
-// );
-
-// export const selectProductError = createSelector(
-//   selectProductState,
-//   (state: ProductState) => state.error
-// );
