@@ -1,5 +1,5 @@
 describe('template spec', () => {
   it('passes', () => {
-    cy.visit('http://localhost:4200', { timeout: 30000 });
+    cy.visit('http://localhost:4200');
   });
 });
