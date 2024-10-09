@@ -25,14 +25,14 @@ import {
 export class HomeComponent {
   http = inject(HttpClient);
   productService = inject(ProductService);
-  product$!: Observable<IProduct[]>;
+  // product$!: Observable<IProduct[]>;
   error!: Observable<string | null>;
 
-  // product$ = this.productService.getProducts() as Observable<IProduct[]>;
+  product$ = this.productService.getProducts() as Observable<IProduct[]>;
 
   constructor(private store: Store<{ cart: { products: IProduct[] } }>) {
     this.store.dispatch(loadProduct());
-    this.product$ = this.store.select(selectAllProducts);
+    // this.product$ = this.store.select(selectAllProducts);
     this.error = this.store.select(selectProductError);
 
     // this.product$ = this.store.select(selectAllProducts);
